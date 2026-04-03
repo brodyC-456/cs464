@@ -1,0 +1,278 @@
+{
+    "title": "Brawlhalla Legends",
+    "description": "Put the legends in order by chronological order they were added to the Game",
+    "legends": [
+        {
+            "id": 1,
+            "name": "Bodvar"
+        },
+        {
+            "id": 2,
+            "name": "Cassidy"
+        },
+        {
+            "id": 3,
+            "name": "Orion"
+        },
+        {
+            "id": 4,
+            "name": "Lord Vraxx"
+        },
+        {
+            "id": 5,
+            "name": "Gnash"
+        },
+        {
+            "id": 6,
+            "name": "Queen Nai"
+        },
+        {
+            "id": 7,
+            "name": "Hattori"
+        },
+        {
+            "id": 8,
+            "name": "Sir Roland"
+        },
+        {
+            "id": 9,
+            "name": "Scarlet"
+        },
+        {
+            "id": 10,
+            "name": "Thatch"
+        },
+        {
+            "id": 11,
+            "name": "Ada"
+        },
+        {
+            "id": 12,
+            "name": "Sentinel"
+        },
+        {
+            "id": 13,
+            "name": "Lucien"
+        },
+        {
+            "id": 14,
+            "name": "Teros"
+        },
+        {
+            "id": 15,
+            "name": "Brynn"
+        },
+        {
+            "id": 16,
+            "name": "Asuri"
+        },
+        {
+            "id": 17,
+            "name": "Barraza"
+        },
+        {
+            "id": 18,
+            "name": "Ember"
+        },
+        {
+            "id": 19,
+            "name": "Azoth"
+        },
+        {
+            "id": 20,
+            "name": "Koji"
+        },
+        {
+            "id": 21,
+            "name": "Ulgrim"
+        },
+        {
+            "id": 22,
+            "name": "Diana"
+        },
+        {
+            "id": 23,
+            "name": "Jhala"
+        },
+        {
+            "id": 24,
+            "name": "Kor"
+        },
+        {
+            "id": 25,
+            "name": "Wu Shang"
+        },
+        {
+            "id": 26,
+            "name": "Val"
+        },
+        {
+            "id": 27,
+            "name": "Ragnir"
+        },
+        {
+            "id": 28,
+            "name": "Cross"
+        },
+        {
+            "id": 29,
+            "name": "Mirage"
+        },
+        {
+            "id": 30,
+            "name": "Nix"
+        },
+        {
+            "id": 31,
+            "name": "Mordex"
+        },
+        {
+            "id": 32,
+            "name": "Yumiko"
+        },
+        {
+            "id": 33,
+            "name": "Artemis"
+        },
+        {
+            "id": 34,
+            "name": "Caspian"
+        },
+        {
+            "id": 35,
+            "name": "Sidra"
+        },
+        {
+            "id": 36,
+            "name": "Xull"
+        },
+        {
+            "id": 37,
+            "name": "Kaya"
+        },
+        {
+            "id": 38,
+            "name": "Isaiah"
+        },
+        {
+            "id": 39,
+            "name": "Jiro"
+        },
+        {
+            "id": 40,
+            "name": "Lin Fei"
+        },
+        {
+            "id": 41,
+            "name": "Zariel"
+        },
+        {
+            "id": 42,
+            "name": "Rayman"
+        },
+        {
+            "id": 43,
+            "name": "Dusk"
+        },
+        {
+            "id": 44,
+            "name": "Fait"
+        },
+        {
+            "id": 45,
+            "name": "Thor"
+        },
+        {
+            "id": 46,
+            "name": "Petra"
+        },
+        {
+            "id": 47,
+            "name": "Vector"
+        },
+        {
+            "id": 48,
+            "name": "Volkov"
+        },
+        {
+            "id": 49,
+            "name": "Onyx"
+        },
+        {
+            "id": 50,
+            "name": "Jaeyun"
+        },
+        {
+            "id": 51,
+            "name": "Mako"
+        },
+        {
+            "id": 52,
+            "name": "Magyar"
+        },
+        {
+            "id": 53,
+            "name": "Reno"
+        },
+        {
+            "id": 54,
+            "name": "Munin"
+        },
+        {
+            "id": 55,
+            "name": "Arcadia"
+        },
+        {
+            "id": 56,
+            "name": "Ezio"
+        },
+        {
+            "id": 57,
+            "name": "Tezca"
+        },
+        {
+            "id": 58,
+            "name": "Thea"
+        },
+        {
+            "id": 59,
+            "name": "Red Raptor"
+        },
+        {
+            "id": 60,
+            "name": "Loki"
+        },
+        {
+            "id": 61,
+            "name": "Seven"
+        },
+        {
+            "id": 62,
+            "name": "Vivi"
+        },
+        {
+            "id": 63,
+            "name": "Imugi"
+        },
+        {
+            "id": 64,
+            "name": "King Zuva"
+        },
+        {
+            "id": 65,
+            "name": "Priya"
+        },
+        {
+            "id": 66,
+            "name": "Ransom"
+        },
+        {
+            "id": 67,
+            "name": "Lady Vera"
+        },
+        {
+            "id": 68,
+            "name": "Rupture"
+        }
+    ]
+}

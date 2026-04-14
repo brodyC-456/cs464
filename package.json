@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev:server": "next dev",
-    "dev": "tsx scripts/dev-local.ts dev:server",
+    "dev": "npm run db:start && tsx scripts/dev-local.ts dev:server",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

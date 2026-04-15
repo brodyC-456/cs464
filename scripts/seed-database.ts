@@ -1,10 +1,18 @@
 import path from 'path';
 import fs from 'fs/promises';
-import { DataFile as DF, DataItem as DI } from '../src/types/data';
 import { createClient } from '@supabase/supabase-js';
 
-type DataItem = DI & { id?: number } // Support `id` field since `bh_legends.json` uses `id` instead of `order`
-type DataFile = Omit<DF, 'items'> & { items: DataItem[] } // replace items with overridden version
+export interface DataFileItem {
+    name: string
+    order: number
+    id?: number
+}
+
+export interface DataFile {
+    title: string
+    description: string
+    items: DataFileItem[]
+}
 
 /**
  * Seed a Supabase database with datasets from the `data/` directory.  

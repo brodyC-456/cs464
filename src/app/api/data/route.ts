@@ -1,37 +1,43 @@
-import { supabase } from '@/lib/supabase'
-import { DataFile } from '@/types/data'
+import { DatasetItem, Dataset, DatasetResponse } from '@/types/data'
+import { getSupabaseClient } from '@/lib/supabase'
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const name = searchParams.get('name')
 
     try {
+        const supabase = getSupabaseClient()
+
         // query param containing name -> return specified dataset
         if (name) {
-            const { data: dataset, error: datasetError } = await supabase
+            const { data: datasetData, error: datasetError } = await supabase
                 .from('datasets')
-                .select('*')
+                .select('id, dataset_slug, title, description')
                 .eq('dataset_slug', name)
                 .single()
+
+            const dataset = datasetData as Dataset | null
 
             if (datasetError || !dataset) {
                 return Response.json({ error: `No dataset found for ${name}` }, { status: 404 })
             }
 
-            const { data: items, error: itemsError } = await supabase
+            const { data: itemsData, error: itemsError } = await supabase
                 .from('dataset_items')
                 .select('item_name, item_order')
                 .eq('dataset_id', dataset.id)
                 .order('item_order', { ascending: true })
 
+            const items = (itemsData || []) as DatasetItem[]
+
             if (itemsError) {
                 throw itemsError
             }
 
-            const dataFile: DataFile = {
+            const dataFile: DatasetResponse = {
                 title: dataset.title,
                 description: dataset.description || '',
-                items: items.map(item => ({
+                items: (items || []).map(item => ({
                     name: item.item_name,
                     order: item.item_order
                 }))
@@ -41,24 +47,28 @@ export async function GET(request: Request) {
         }
 
         // no query param -> return all datasets
-        const { data: datasets, error: datasetsError } = await supabase
+        const { data: datasetsData, error: datasetsError } = await supabase
             .from('datasets')
-            .select('*')
+            .select('id, dataset_slug, title, description')
             .order('dataset_slug', { ascending: true })
+
+        const datasets = (datasetsData || []) as Dataset[]
 
         if (datasetsError) {
             throw datasetsError
         }
 
-        const allData: Record<string, DataFile> = {}
+        const allData: Record<string, DatasetResponse> = {}
 
         // fetch items for each dataset
         for (const dataset of datasets || []) {
-            const { data: items, error: itemsError } = await supabase
+            const { data: itemsData, error: itemsError } = await supabase
                 .from('dataset_items')
                 .select('item_name, item_order')
                 .eq('dataset_id', dataset.id)
                 .order('item_order', { ascending: true })
+
+            const items = (itemsData || []) as DatasetItem[]
 
             if (itemsError) {
                 throw itemsError

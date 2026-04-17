@@ -19,6 +19,13 @@ export default function Home() {
   const datasets: DatasetResponse[] = [birds, fish, planets]
   const { title, description, items } = datasets[selectedIndex];
 
+  const [shuffledItems, setShuffledItems] = useState(items);
+
+  useEffect(() => {
+    const shuffled = [...items].sort(() => Math.random() - 0.5);
+    setShuffledItems(shuffled);
+  }, [items]);
+
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, px: 2 }}>
 

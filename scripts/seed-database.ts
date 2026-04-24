@@ -1,4 +1,5 @@
 import path from 'path';
+import 'dotenv/config';
 import fs from 'fs/promises';
 import { createClient } from '@supabase/supabase-js';
 

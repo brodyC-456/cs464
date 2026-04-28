@@ -23,6 +23,8 @@ export default function Home() {
     message: string
   } | null>(null);
 
+  const [itemCorrectness, setItemCorrectness] = useState<('correct' | 'close' |'wrong')[]>([])
+
   useEffect(() => {
     fetch("/api/titles")
       .then((r: Response) => r.json())
@@ -43,16 +45,26 @@ export default function Home() {
     fetch(`/api/data?name=${datasetMeta[selectedIndex].dataset_slug}`)
       .then((r: Response) => r.json())
       .then((data: Dataset) => setDataset(data))
+    setItemCorrectness([])
     }
 
   }, [selectedIndex, datasetMeta])
 
   const handleCheckOrder = () => {
     if (dataset) {
-      const correctCount = shuffledItems.reduce((count, item, index) => {
-        return item.name === dataset.items[index].name ? count + 1 : count;
-      }, 0);
-
+      const threshold = dataset.items.length <= 15 ? 1 : 2;
+      const itemStatus = shuffledItems.map((item, index) => {
+        const correctIndex = dataset.items.findIndex(
+          (d) => d.name === item.name
+        );
+        const distance = Math.abs(correctIndex - index)
+        // Return status
+        if (distance === 0) return 'correct';
+        if (distance <= threshold) return 'close';
+        return 'wrong';
+      })
+      setItemCorrectness(itemStatus);
+      const correctCount = itemStatus.filter(s => s ==='correct').length
       if (correctCount === dataset.items.length) {
         setFeedback({
           severity: 'success',
@@ -70,6 +82,7 @@ export default function Home() {
   const handleReorder = (newOrder: DatasetItem[]) => {
     setShuffledItems(newOrder);
     setFeedback(null);
+    setItemCorrectness([]);
   };
 
   return (
@@ -123,7 +136,7 @@ export default function Home() {
         onReorder={handleReorder}
         style={{ display: 'flex', flexDirection: 'column', gap: 8 }}
       >
-        {shuffledItems.map((item) => (
+        {shuffledItems.map((item, index) => (
           <Reorder.Item
             key={item.order}
             value={item}
@@ -132,7 +145,18 @@ export default function Home() {
             onDragStart={() => setIsDragging(true)}
             onDragEnd={() => setIsDragging(false)}
           >
-            <Card variant="outlined" sx={{ cursor: isDragging ? 'grabbing' : 'grab' }}>
+            <Card 
+              variant="outlined" 
+              sx={{ 
+                cursor: isDragging ? 'grabbing' : 'grab',
+                bgcolor:
+                  itemCorrectness[index] === 'correct'
+                    ? 'success.light'
+                    : itemCorrectness[index] === 'close'
+                    ? 'warning.light'
+                    : 'background.paper'
+              }}>
+
               <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2, py: '12px !important' }}>
                 <DragHandleIcon color="action" />
                 <Typography variant="body1">{item.name}</Typography>

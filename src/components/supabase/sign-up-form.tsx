@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
-import { Alert, Box, Button, Card, CardContent, CardHeader, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, Card, CardContent, CardHeader, Stack, TextField, Typography, IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { createBrowserClient } from "@/lib/supabase/createBrowserClient";
 
 export function SignUpForm({
@@ -14,6 +15,8 @@ export function SignUpForm({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -47,11 +50,25 @@ export function SignUpForm({
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }} className={className} {...props}>
-      <Card>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 3,
+        maxWidth: 500,
+        mx: "auto",
+        width: "100%",
+        px: 2,
+        mt: 2,
+      }}
+      className={className}
+      {...props}
+    >
+      <Card sx={{ boxShadow: 1 }}>
         <CardHeader
           title={<Typography variant="h5" component="h1" sx={{ fontWeight: 700 }}>Sign up</Typography>}
           subheader="Create a new account"
+          sx={{ pb: 2 }}
         />
         <CardContent>
           <Stack component="form" spacing={2.5} onSubmit={handleSignUp}>
@@ -64,24 +81,57 @@ export function SignUpForm({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               fullWidth
+              slotProps={{ inputLabel: { shrink: true } }}
             />
             <TextField
               label="Password"
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               fullWidth
+              slotProps={{
+                inputLabel: { shrink: true },
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                        size="small"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
             />
             <TextField
               label="Repeat Password"
               id="repeat-password"
-              type="password"
+              type={showRepeatPassword ? "text" : "password"}
               required
               value={repeatPassword}
               onChange={(e) => setRepeatPassword(e.target.value)}
               fullWidth
+              slotProps={{
+                inputLabel: { shrink: true },
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+                        edge="end"
+                        size="small"
+                      >
+                        {showRepeatPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
             />
             {error ? <Alert severity="error">{error}</Alert> : null}
             <Button type="submit" variant="contained" size="large" disabled={isLoading} fullWidth>
